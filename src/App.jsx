@@ -5,7 +5,9 @@ function App() {
   const [search, setSearch] = useState("");
   const API_KEY = import.meta.env.VITE_API_KEY;
 
-  function handleClick() {
+  function handleClick(e) {
+    e.preventDefault();
+
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${search}`
     )
@@ -33,7 +35,7 @@ function App() {
               />
               <button
                 className="btn btn-danger shadow my-2 my-sm-0"
-                type="submit"
+                type="button"
                 onClick={handleClick}
               >
                 Search
@@ -43,7 +45,18 @@ function App() {
         </nav>
       </header>
 
-      <main></main>
+      <main>
+        {moviesData.map((movie) => {
+          return (
+            <ul key={movie.id}>
+              <li>{movie.title}</li>
+              <li>{movie.original_title}</li>
+              <li>{movie.original_language}</li>
+              <li>{movie.vote_average.toFixed(1)}</li>
+            </ul>
+          );
+        })}
+      </main>
     </>
   );
 }
