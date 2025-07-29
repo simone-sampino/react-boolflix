@@ -1,21 +1,49 @@
 import { useState, useEffect } from "react";
+import "flag-icons/css/flag-icons.min.css";
 
 function App() {
   const [moviesData, setMoviesData] = useState([]);
+  const [tvShowData, setTvShowData] = useState([]);
   const [search, setSearch] = useState("");
   const API_KEY = import.meta.env.VITE_API_KEY;
+  const movieUrl = "https://api.themoviedb.org/3/search/movie";
+  const tvShowUrl = "https://api.themoviedb.org/3/search/tv";
 
   function handleClick(e) {
     e.preventDefault();
 
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${search}`
-    )
+    fetch(`${movieUrl}?api_key=${API_KEY}&query=${search}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.results);
         setMoviesData(data.results);
       });
+
+    fetch(`${tvShowUrl}?api_key=${API_KEY}&query=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results);
+        setTvShowData(data.results);
+      });
+  }
+
+  function renderFlag(flag) {
+    if (flag == "en") {
+      return "gb";
+    }
+    if (flag == "ja") {
+      return "jp";
+    }
+    if (flag == "uk") {
+      return "ua";
+    }
+    if (flag == "zh") {
+      return "ch";
+    }
+    if (flag == "ko") {
+      return "kr";
+    }
+    return flag;
   }
 
   return (
@@ -51,8 +79,23 @@ function App() {
             <ul key={movie.id}>
               <li>{movie.title}</li>
               <li>{movie.original_title}</li>
-              <li>{movie.original_language}</li>
+              <li
+                className={`fi fi-${renderFlag(movie.original_language)}`}
+              ></li>
               <li>{movie.vote_average.toFixed(1)}</li>
+            </ul>
+          );
+        })}
+
+        {tvShowData.map((tvShow) => {
+          return (
+            <ul key={tvShow.id}>
+              <li>{tvShow.name}</li>
+              <li>{tvShow.original_name}</li>
+              <li
+                className={`fi fi-${renderFlag(tvShow.original_language)}`}
+              ></li>
+              <li>{tvShow.vote_average.toFixed(1)}</li>
             </ul>
           );
         })}
