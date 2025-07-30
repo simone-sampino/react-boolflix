@@ -47,10 +47,25 @@ function App() {
     return flag;
   }
 
+  function renderStars(vote_average) {
+    const stars = [];
+    const fullStars = Math.ceil(vote_average / 2);
+    const maxStars = 5;
+
+    for (let i = 0; i < maxStars; i++) {
+      if (i < fullStars) {
+        stars.push(<i className="bi bi-star-fill"></i>);
+      } else {
+        stars.push(<i className="bi bi-star"></i>);
+      }
+    }
+    return stars;
+  }
+
   return (
     <>
       <header className="pb-5">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
           <div className="container">
             <a className="navbar-brand" href="#">
               <img src="../public/boolflix-logo.png" alt="boolflix-logo" />
@@ -84,9 +99,11 @@ function App() {
               <li
                 className={`fi fi-${renderFlag(movie.original_language)}`}
               ></li>
-              <li>{movie.vote_average.toFixed(1)}</li>
+              <li className="text-warning">
+                {renderStars(movie.vote_average)}
+              </li>
               <li>
-                <img src={`${images}${movie.poster_path}`} alt="" />
+                <img src={`${images}${movie.poster_path}`} alt={movie.title} />
               </li>
             </ul>
           );
