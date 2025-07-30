@@ -54,9 +54,9 @@ function App() {
 
     for (let i = 0; i < maxStars; i++) {
       if (i < fullStars) {
-        stars.push(<i className="bi bi-star-fill"></i>);
+        stars.push(<i className="bi bi-star-fill text-warning"></i>);
       } else {
-        stars.push(<i className="bi bi-star"></i>);
+        stars.push(<i className="bi bi-star text-warning"></i>);
       }
     }
     return stars;
@@ -92,17 +92,42 @@ function App() {
       <main>
         <div className="container">
           <section id="movies">
-            <h3 className="pt-5 my-5 fw-bold">MOVIES</h3>
+            <h2 className="pt-5 my-5 fw-bold">MOVIES</h2>
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
               {moviesData.map((movie) => {
                 return (
-                  <div className="col">
-                    <div className="card d-flex h-100">
+                  <div key={movie.id} className="col">
+                    <div className="card d-flex h-100 shadow">
                       <img
                         className="card-img-top max-width"
                         src={`${images}${movie.poster_path}`}
                         alt={movie.title}
                       />
+                      {/* info on hover */}
+                      <div className="card-body info h-100 bg-dark text-light">
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Title: </span>
+                          {movie.title}
+                        </div>
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Original title: </span>
+                          {movie.original_title}
+                        </div>
+                        <span className="fw-bold">Original language: </span>
+                        <div
+                          className={`card-text mb-1 fi fi-${renderFlag(
+                            movie.original_language
+                          )}`}
+                        ></div>
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Vote: </span>
+                          {renderStars(movie.vote_average)}
+                        </div>
+                        <div className="card-text">
+                          <span className="fw-bold">Overview: </span>
+                          {movie.overview}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -111,58 +136,48 @@ function App() {
           </section>
 
           <section id="tv-shows" className="mb-5">
-            <h3 className="my-5 fw-bold">TV SHOWS</h3>
+            <h2 className="my-5 fw-bold">TV SHOWS</h2>
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
               {tvShowData.map((tvShow) => {
                 return (
-                  <div className="col">
-                    <div className="card d-flex h-100">
+                  <div key={tvShow.id} className="col">
+                    <div className="card d-flex h-100 shadow">
                       <img
                         className="card-img-top max-width"
                         src={`${images}${tvShow.poster_path}`}
                         alt={tvShow.name}
                       />
+                      {/* info on hover */}
+                      <div className="card-body info h-100 bg-dark text-light">
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Title: </span>
+                          {tvShow.name}
+                        </div>
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Original title: </span>
+                          {tvShow.original_name}
+                        </div>
+                        <span className="fw-bold">Original language: </span>
+                        <div
+                          className={`card-text mb-1 fi fi-${renderFlag(
+                            tvShow.original_language
+                          )}`}
+                        ></div>
+                        <div className="card-text mb-1">
+                          <span className="fw-bold">Vote: </span>
+                          {renderStars(tvShow.vote_average)}
+                        </div>
+                        <div className="card-text">
+                          <span className="fw-bold">Overview: </span>
+                          {tvShow.overview}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
               })}
             </div>
           </section>
-
-          {/* {moviesData.map((movie) => {
-            return (
-              <ul key={movie.id}>
-                <li>{movie.title}</li>
-                <li>{movie.original_title}</li>
-                <li
-                  className={`fi fi-${renderFlag(movie.original_language)}`}
-                ></li>
-                <li className="text-warning">
-                  {renderStars(movie.vote_average)}
-                </li>
-                <li>
-                  <img src={`${images}${movie.poster_path}`} alt={movie.title} />
-                </li>
-              </ul>
-            );
-          })} */}
-
-          {/* <h3>TV SHOWS</h3>
-          {tvShowData.map((tvShow) => {
-            return (
-              <ul key={tvShow.id}>
-                <li>{tvShow.name}</li>
-                <li>{tvShow.original_name}</li>
-                <li
-                  className={`fi fi-${renderFlag(tvShow.original_language)}`}
-                ></li>
-                <li>{tvShow.vote_average.toFixed(1)}</li>
-                <li>
-                  <img src={`${images}${tvShow.poster_path}`} alt="" />
-                </li>
-              </ul>
-            );
-          })} */}
         </div>
       </main>
     </>

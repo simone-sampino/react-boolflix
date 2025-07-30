@@ -6,3 +6,17 @@
   min-height: 400px;
   object-fit: cover;
 }
+
+.info {
+  display: none;
+}
+
+.card:hover {
+  img {
+    display: none;
+  }
+
+  .info {
+    display: block;
+  }
+}
