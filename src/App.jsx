@@ -8,6 +8,7 @@ function App() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const movieUrl = "https://api.themoviedb.org/3/search/movie";
   const tvShowUrl = "https://api.themoviedb.org/3/search/tv";
+  const images = "https://image.tmdb.org/t/p/w342/";
 
   function handleClick(e) {
     e.preventDefault();
@@ -48,7 +49,7 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className="pb-5">
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
           <div className="container">
             <a className="navbar-brand" href="#">
@@ -73,7 +74,8 @@ function App() {
         </nav>
       </header>
 
-      <main>
+      <main className="pt-5 mt-5">
+        <h3>MOVIES</h3>
         {moviesData.map((movie) => {
           return (
             <ul key={movie.id}>
@@ -83,10 +85,14 @@ function App() {
                 className={`fi fi-${renderFlag(movie.original_language)}`}
               ></li>
               <li>{movie.vote_average.toFixed(1)}</li>
+              <li>
+                <img src={`${images}${movie.poster_path}`} alt="" />
+              </li>
             </ul>
           );
         })}
 
+        <h3>TV SHOWS</h3>
         {tvShowData.map((tvShow) => {
           return (
             <ul key={tvShow.id}>
@@ -96,6 +102,9 @@ function App() {
                 className={`fi fi-${renderFlag(tvShow.original_language)}`}
               ></li>
               <li>{tvShow.vote_average.toFixed(1)}</li>
+              <li>
+                <img src={`${images}${tvShow.poster_path}`} alt="" />
+              </li>
             </ul>
           );
         })}
