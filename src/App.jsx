@@ -79,7 +79,7 @@ function App() {
               />
               <button
                 className="btn btn-danger shadow my-2 my-sm-0"
-                type="button"
+                type="submit"
                 onClick={handleClick}
               >
                 Search
@@ -90,7 +90,25 @@ function App() {
       </header>
 
       <main className="pt-5 mt-5">
-        <h3>MOVIES</h3>
+        <div className="container">
+          <h3>MOVIES</h3>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
+            {moviesData.map((movie) => {
+              return (
+                <div className="col">
+                  <div className="card d-flex h-100">
+                    <img
+                      className="card-img-top max-width"
+                      src={`${images}${movie.poster_path}`}
+                      alt={movie.title}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {moviesData.map((movie) => {
           return (
             <ul key={movie.id}>

@@ -1,2 +1,8 @@
 @import "bootstrap";
 @import "bootstrap-icons";
+
+.max-width {
+  width: 100%;
+  min-height: 400px;
+  object-fit: cover;
+}
