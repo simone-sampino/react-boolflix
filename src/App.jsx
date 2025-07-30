@@ -89,60 +89,81 @@ function App() {
         </nav>
       </header>
 
-      <main className="pt-5 mt-5">
+      <main>
         <div className="container">
-          <h3>MOVIES</h3>
-          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
-            {moviesData.map((movie) => {
-              return (
-                <div className="col">
-                  <div className="card d-flex h-100">
-                    <img
-                      className="card-img-top max-width"
-                      src={`${images}${movie.poster_path}`}
-                      alt={movie.title}
-                    />
+          <section id="movies">
+            <h3 className="pt-5 my-5 fw-bold">MOVIES</h3>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
+              {moviesData.map((movie) => {
+                return (
+                  <div className="col">
+                    <div className="card d-flex h-100">
+                      <img
+                        className="card-img-top max-width"
+                        src={`${images}${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section id="tv-shows" className="mb-5">
+            <h3 className="my-5 fw-bold">TV SHOWS</h3>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3">
+              {tvShowData.map((tvShow) => {
+                return (
+                  <div className="col">
+                    <div className="card d-flex h-100">
+                      <img
+                        className="card-img-top max-width"
+                        src={`${images}${tvShow.poster_path}`}
+                        alt={tvShow.name}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* {moviesData.map((movie) => {
+            return (
+              <ul key={movie.id}>
+                <li>{movie.title}</li>
+                <li>{movie.original_title}</li>
+                <li
+                  className={`fi fi-${renderFlag(movie.original_language)}`}
+                ></li>
+                <li className="text-warning">
+                  {renderStars(movie.vote_average)}
+                </li>
+                <li>
+                  <img src={`${images}${movie.poster_path}`} alt={movie.title} />
+                </li>
+              </ul>
+            );
+          })} */}
+
+          {/* <h3>TV SHOWS</h3>
+          {tvShowData.map((tvShow) => {
+            return (
+              <ul key={tvShow.id}>
+                <li>{tvShow.name}</li>
+                <li>{tvShow.original_name}</li>
+                <li
+                  className={`fi fi-${renderFlag(tvShow.original_language)}`}
+                ></li>
+                <li>{tvShow.vote_average.toFixed(1)}</li>
+                <li>
+                  <img src={`${images}${tvShow.poster_path}`} alt="" />
+                </li>
+              </ul>
+            );
+          })} */}
         </div>
-
-        {moviesData.map((movie) => {
-          return (
-            <ul key={movie.id}>
-              <li>{movie.title}</li>
-              <li>{movie.original_title}</li>
-              <li
-                className={`fi fi-${renderFlag(movie.original_language)}`}
-              ></li>
-              <li className="text-warning">
-                {renderStars(movie.vote_average)}
-              </li>
-              <li>
-                <img src={`${images}${movie.poster_path}`} alt={movie.title} />
-              </li>
-            </ul>
-          );
-        })}
-
-        <h3>TV SHOWS</h3>
-        {tvShowData.map((tvShow) => {
-          return (
-            <ul key={tvShow.id}>
-              <li>{tvShow.name}</li>
-              <li>{tvShow.original_name}</li>
-              <li
-                className={`fi fi-${renderFlag(tvShow.original_language)}`}
-              ></li>
-              <li>{tvShow.vote_average.toFixed(1)}</li>
-              <li>
-                <img src={`${images}${tvShow.poster_path}`} alt="" />
-              </li>
-            </ul>
-          );
-        })}
       </main>
     </>
   );
